@@ -1,0 +1,18 @@
+<% @books.each do |book| %>
+<div>
+  <p><%= book.user.name %></p>
+  <p>Title:<%= link_to "#{book.title}", book_path(book) %></p>
+  <p>Opinion:<%= book.body %></p>
+</div>
+<% end %>
+
+<h1>New book</h1>
+<%= form_with model:@book, local:true do |f| %>
+<h3>Title</h3>
+<%= f.text_field :title %>
+<h3>Opinion</h3>
+<%= f.text_area :body %>
+<div>
+<%= f.submit 'Create book' %>
+</div>
+<% end %>
