@@ -1,9 +1,35 @@
 <div class="book-body">
-  <p><%= @book.user.name %></p>
+  <h1>Bookers</h1>
+<h3>User info</h3>
+<%= attachment_image_tag @user.profile_image, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+<p>name</p><%= @user.name %>
+<p>introduction</p><%= @user.introduction %>
+
+
+
+  <h1>book detail</h1>
+  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+  <p><%= link_to "#{@book.user.name}", user_path(@user) %></p>
   <p><%= @book.title %></p>
   <p><%= @book.body %></p>
-  <% if @book.user == current_user %>
-  <%= link_to "destroy", book_path(@book), method: :delete %>
+
+  <% if @user == current_user %>
+    <%= link_to "destroy", book_path(@book), method: :delete %>
+    <%= link_to "edit", edit_book_path(@book) %>
   <% end %>
+
+  <div>
+ <h1>New book</h1>
+   <%= form_with model:@books, local:true do |f| %>
+   <h3>Title</h3>
+     <%= f.text_field :title %>
+   <h3>Opinion</h3>
+     <%= f.text_area :body %>
+   <div>
+     <%= f.submit 'Create book' %>
+   </div>
+ <% end %>
+</div>
+
 
 </div>

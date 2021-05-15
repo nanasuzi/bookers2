@@ -1,8 +1,9 @@
-<h1>Bookers</h1>
+<div class="book-body">
+  <h1>Bookers</h1>
 <h3>User info</h3>
-<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-<p>name</p><%= current_user.name %>
-<p>introduction</p><%= current_user.introduction %>
+<%= attachment_image_tag @user.profile_image, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+<p>name</p><%= @user.name %>
+<p>introduction</p><%= @user.introduction %>
 
 
 <h1>Books</h1>
@@ -18,10 +19,9 @@
 </div>
 <% end %>
 
-
 <div>
  <h1>New book</h1>
-   <%= form_with model:@book, local:true do |f| %>
+   <%= form_with model:@book, url: books_path, method: :post, local:true do |f| %>
    <h3>Title</h3>
      <%= f.text_field :title %>
    <h3>Opinion</h3>
