@@ -1,2 +1,32 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>Bookers</h1>
+<h3>User info</h3>
+<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+<p>name</p><%= current_user.name %>
+<p>introduction</p><%= current_user.introduction %>
+
+<%= link_to "設定", user_path(current_user) %>
+
+
+<h1>Users</h1>
+<% @users.each do |user| %>
+<div>
+    <%= link_to book_path(user) do %>
+  <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+  <% end %>
+
+  <p>name<%= user.name %></p>
+  <%= link_to "show", user_path(user) %>
+</div>
+<% end %>
+
+<div>
+ <h1>New book</h1>
+   <%= form_with model:@book, local:true do |f| %>
+   <h3>Title</h3>
+     <%= f.text_field :title %>
+   <h3>Opinion</h3>
+     <%= f.text_area :body %>
+   <div>
+     <%= f.submit 'Create book' %>
+   </div>
+ <% end %>

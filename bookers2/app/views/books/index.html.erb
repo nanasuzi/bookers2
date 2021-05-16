@@ -1,23 +1,30 @@
+   <% if @book.errors.any? %>
+    <%= @book.errors.count %>erros
+    <% @book.errors.full_messages.each do |message| %>
+    <%= message %>
+    <% end %>
+    <% end %>
+
 <h1>Bookers</h1>
 <h3>User info</h3>
-<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+<%= attachment_image_tag current_user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
 <p>name</p><%= current_user.name %>
 <p>introduction</p><%= current_user.introduction %>
 
+<%= link_to "設定", user_path(current_user) %>
 
 <h1>Books</h1>
 <% @books.each do |book| %>
 <div>
 
   <%= link_to book_path(book) do %>
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+  <%= attachment_image_tag book.user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
   <% end %>
 
   <p>Title:<%= link_to "#{book.title}", book_path(book) %></p>
   <p>Opinion:<%= book.body %></p>
 </div>
 <% end %>
-
 
 <div>
  <h1>New book</h1>

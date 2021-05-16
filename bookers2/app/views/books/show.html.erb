@@ -1,9 +1,11 @@
 <div class="book-body">
   <h1>Bookers</h1>
 <h3>User info</h3>
-<%= attachment_image_tag @user.profile_image, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+<%= attachment_image_tag @user, :profile_image, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
 <p>name</p><%= @user.name %>
 <p>introduction</p><%= @user.introduction %>
+
+<%= link_to "設定", user_path(current_user) %>
 
 
 
@@ -19,6 +21,8 @@
   <% end %>
 
   <div>
+
+
  <h1>New book</h1>
    <%= form_with model:@books, local:true do |f| %>
    <h3>Title</h3>
