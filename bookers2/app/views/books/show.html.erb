@@ -1,23 +1,21 @@
 <div class="book-body">
   <h1>Bookers</h1>
 <h3>User info</h3>
-<%= attachment_image_tag @user, :profile_image, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
 <p>name</p><%= @user.name %>
 <p>introduction</p><%= @user.introduction %>
 
-<%= link_to "設定", user_path(current_user) %>
+<%= link_to "設定", edit_user_path(current_user) %>
 
-
-
-  <h1>book detail</h1>
+  <h1>Book detail</h1>
   <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
   <p><%= link_to "#{@book.user.name}", user_path(@user) %></p>
   <p><%= @book.title %></p>
   <p><%= @book.body %></p>
 
   <% if @user == current_user %>
-    <%= link_to "destroy", book_path(@book), method: :delete %>
-    <%= link_to "edit", edit_book_path(@book) %>
+    <%= link_to "Destroy", book_path(@book), method: :delete %>
+    <%= link_to "Edit", edit_book_path(@book) %>
   <% end %>
 
   <div>
@@ -30,7 +28,7 @@
    <h3>Opinion</h3>
      <%= f.text_area :body %>
    <div>
-     <%= f.submit 'Create book' %>
+     <%= f.submit 'Create Book' %>
    </div>
  <% end %>
 </div>

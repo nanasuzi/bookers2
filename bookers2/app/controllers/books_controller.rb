@@ -25,6 +25,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book = Book.find(params[:id])
+    @user = User.find_by(profile_image_id: @book.user_id)
     @book.destroy
     redirect_to books_path
   end
@@ -45,7 +46,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body,)
   end
 
 end

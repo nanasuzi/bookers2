@@ -10,7 +10,7 @@
 <%= form_with model:@book, local:true do |f| %>
 <p>Title<%= f.text_field :title %></p>
 <p>Opinion<%= f.text_area :body %></p>
-<div><%= f.submit 'Update book' %></div>
+<div><%= f.submit 'Update Book' %></div>
 <% end %>
 
-<%= link_to "show", book_path(@book) %>|<%= link_to "back", books_path %>
+<%= link_to "Show", book_path(@book) %>|<%= link_to "Back", books_path %>
