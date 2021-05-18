@@ -1,0 +1,21 @@
+<h1 class="my-3">User info</h1>
+<%= attachment_image_tag current_user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg"%>
+
+<table class="table">
+ <tbody>
+
+  <tr>
+    <th>name</th>
+    <th><%= current_user.name %></th>
+  </tr>
+
+  <tr>
+    <th>
+      introduction
+    </th>
+    <th>
+      <%= current_user.introduction %>
+    </th>
+  </tr>
+ </tbody>
+</table>

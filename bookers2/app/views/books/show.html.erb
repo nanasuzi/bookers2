@@ -1,37 +1,63 @@
-<div class="book-body">
-  <h1>Bookers</h1>
-<h3>User info</h3>
-<%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-<p>name</p><%= @user.name %>
-<p>introduction</p><%= @user.introduction %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
 
-<%= link_to "設定", edit_user_path(current_user) %>
+    <%= render 'list-show', user: @user %>
 
-  <h1>Book detail</h1>
-  <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg"%>
-  <p><%= link_to "#{@book.user.name}", user_path(@user) %></p>
-  <p><%= @book.title %></p>
-  <p><%= @book.body %></p>
 
-  <% if @user == current_user %>
-    <%= link_to "Destroy", book_path(@book), method: :delete %>
-    <%= link_to "Edit", edit_book_path(@book) %>
-  <% end %>
-
-  <div>
-
+    <%= link_to edit_user_path(@book.user), method: :get do %>
+    <i class="fas fa-user-cog btn btn-outline-secondary btn-block mb-3"></i>
+    <% end %>
 
  <h1>New book</h1>
-   <%= form_with model:@books, local:true do |f| %>
-   <h3>Title</h3>
-     <%= f.text_field :title %>
-   <h3>Opinion</h3>
-     <%= f.text_area :body %>
+   <%= form_with model:@books, url: books_path, method: :post, local:true do |f| %>
+   <label for="book_title">Title</label>
    <div>
-     <%= f.submit 'Create Book' %>
+     <%= f.text_field :title, class: "form-control book_title" %>
+   </div>
+   <label for="book_opinion">Opinion</h3>
+   <div>
+     <%= f.text_area :body, class: "form-control book_title" %>
+     </div>
+   <div class="my-2">
+     <%= f.submit 'Create Book', class: "btn btn-success" %>
    </div>
  <% end %>
 </div>
 
+    <div class="col-md-8 offset-md-1">
+      <h1 class="my-3">Book detail</h1>
+        <table class="table table-hover">
+       <thead>
+         <tr>
+          <th></th>
+          <th>title</th>
+          <th>opinion</th>
+          <th colspan="3"></th>
+         </tr>
+        </thead>
 
+      <tbody>
+         <tr>
+           <td>
+          <%= attachment_image_tag @user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size:'40x40' %><br>
+           <%= link_to "#{@book.user.name}", user_path(@user) %></td>
+           <td><%= @book.title %></td>
+           <td><%= @book.body %></td>
+
+        <% if @user == current_user %>
+         <td>
+          <%= link_to "Edit", edit_book_path(@book), class: 'btn btn-sm btn-success' %>
+          </td>
+
+          <td>
+            <%= link_to "Destroy", book_path(@book), method: :delete, data: {confirm: "本当に削除しますか？"}, class: 'btn btn-sm btn-danger' %>
+          </td>
+
+         </tr>
+        <% end %>
+       </tbody>
+      </table>
+    </div>
+ </div>
 </div>
